@@ -3,7 +3,7 @@ fun main() {
     var suma = 0
 
     for (i in 97..1003) {
-        if (i % 2 == 0) { // Verifica si el número es par
+        if (i % 2 == 0) { 
             suma += i
         }
     }
