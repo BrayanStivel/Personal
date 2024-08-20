@@ -16,7 +16,6 @@ class User(models.Model):
     age = models.PositiveIntegerField(default=0)
     salary = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
     state = models.BooleanField(default=True)
-    photo = models.ImageField(upload_to='photo/%Y/%m/%d', null=True, blank=True)
     file = models.FileField(upload_to='file/%Y/%m/%d', null=True, blank=True)
 '''
     ROLE_CHOICES = [
