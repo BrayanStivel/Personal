@@ -1,0 +1,5 @@
+int numero, cuadrado;
+Console.WriteLine("Ingrese un número:");
+numero = int.Parse(Console.ReadLine());
+cuadrado = numero * numero;
+Console.WriteLine("El cuadrado del número es: " + cuadrado);
