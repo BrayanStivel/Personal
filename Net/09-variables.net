@@ -1,0 +1,9 @@
+double valorUnitario, cantidad, valorTotal, IVA;
+Console.WriteLine("Ingrese el valor unitario:");
+valorUnitario = double.Parse(Console.ReadLine());
+Console.WriteLine("Ingrese la cantidad de productos:");
+cantidad = double.Parse(Console.ReadLine());
+valorTotal = valorUnitario * cantidad;
+IVA = valorTotal * 0.16;
+valorTotal += IVA;
+Console.WriteLine("El valor total a pagar es: " + valorTotal);
