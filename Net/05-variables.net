@@ -1,0 +1,5 @@
+double numero, porcentaje20;
+Console.WriteLine("Ingrese un número:");
+numero = double.Parse(Console.ReadLine());
+porcentaje20 = numero * 0.20;
+Console.WriteLine("El 20% del número es: " + porcentaje20);
