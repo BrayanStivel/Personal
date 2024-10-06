@@ -1,0 +1,10 @@
+double salarioDiario, diasTrabajados, salarioBruto, descuentoPension, descuentoSalud, salarioNeto;
+Console.WriteLine("Ingrese el salario diario:");
+salarioDiario = double.Parse(Console.ReadLine());
+Console.WriteLine("Ingrese el número de días trabajados:");
+diasTrabajados = double.Parse(Console.ReadLine());
+salarioBruto = salarioDiario * diasTrabajados;
+descuentoPension = salarioBruto * 0.10;
+descuentoSalud = salarioBruto * 0.15;
+salarioNeto = salarioBruto - (descuentoPension + descuentoSalud);
+Console.WriteLine("El salario neto a pagar es: " + salarioNeto);
