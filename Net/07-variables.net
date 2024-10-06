@@ -1,0 +1,5 @@
+double lado, area;
+Console.WriteLine("Ingrese la longitud de un lado del cuadrado:");
+lado = double.Parse(Console.ReadLine());
+area = lado * lado;
+Console.WriteLine("El área del cuadrado es: " + area);
