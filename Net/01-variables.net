@@ -1,0 +1,7 @@
+int num1, num2, num3, resultado;
+Console.WriteLine("Ingrese tres números:");
+num1 = int.Parse(Console.ReadLine());
+num2 = int.Parse(Console.ReadLine());
+num3 = int.Parse(Console.ReadLine());
+resultado = num1 * num2 * num3;
+Console.WriteLine("El resultado de la multiplicación es: " + resultado);
