@@ -1,24 +1,29 @@
-package com.example.personas.entity;
+package com.example.personas.model;
 
-import javax.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
 import java.util.List;
 
 @Entity
 public class Rol {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     private String nombre;
 
     @OneToMany(mappedBy = "rol")
     private List<Empleado> empleados;
 
-    // Constructor por defecto
+    // Constructor sin parámetros
     public Rol() {}
 
-    // Constructor con todos los campos
+    // Constructor con parámetros
     public Rol(String nombre) {
         this.nombre = nombre;
     }

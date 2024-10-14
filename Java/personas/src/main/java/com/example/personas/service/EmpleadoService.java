@@ -1,41 +1,45 @@
 package com.example.personas.service;
 
-import com.example.personas.entity.Empleado;
-import com.example.personas.entity.Rol;
+import com.example.personas.model.Empleado;
 import com.example.personas.repository.EmpleadoRepository;
-import com.example.personas.repository.RolRepository;
-import com.example.personas.serviceinterface.EmpleadoServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class EmpleadoService implements EmpleadoServiceInterface {
+public class EmpleadoService {
 
     @Autowired
     private EmpleadoRepository empleadoRepository;
 
-    @Autowired
-    private RolRepository rolRepository;
+    public List<Empleado> listarEmpleados() {
+        return empleadoRepository.findAll();
+    }
 
-    // Método para crear un nuevo empleado
-    @Override
-    public Empleado crearEmpleado(Empleado empleado) {
+    public Optional<Empleado> obtenerEmpleado(Long id) {
+        return empleadoRepository.findById(id);
+    }
+
+    public Empleado guardarEmpleado(Empleado empleado) {
         return empleadoRepository.save(empleado);
     }
 
-    // Método para obtener empleados por rol
-    @Override
-    public List<Empleado> obtenerEmpleadosPorRol(String nombreRol) {
-        Rol rol = rolRepository.findByNombre(nombreRol)
-                .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
-        return empleadoRepository.findByRol(rol);
+    public Optional<Empleado> actualizarEmpleado(Long id, Empleado empleado) {
+        return empleadoRepository.findById(id).map(e -> {
+            e.setNombre(empleado.getNombre());
+            e.setApellido(empleado.getApellido());
+            e.setRol(empleado.getRol());
+            return empleadoRepository.save(e);
+        });
     }
 
-    // Método para obtener todos los empleados
-    @Override
-    public List<Empleado> obtenerTodosLosEmpleados() {
-        return empleadoRepository.findAll();
+    public boolean eliminarEmpleado(Long id) {
+        if (empleadoRepository.existsById(id)) {
+            empleadoRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

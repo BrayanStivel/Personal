@@ -1,28 +1,32 @@
-package com.example.personas.entity;
+package com.example.personas.model;
 
-import javax.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Empleado {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     private String nombre;
-    private String email;
+    private String apellido;
 
     @ManyToOne
     @JoinColumn(name = "rol_id")
     private Rol rol;
 
-    // Constructor por defecto
+    // Constructor sin parámetros
     public Empleado() {}
 
-    // Constructor con todos los campos
-    public Empleado(String nombre, String email, Rol rol) {
+    // Constructor con parámetros
+    public Empleado(String nombre, String apellido, Rol rol) {
         this.nombre = nombre;
-        this.email = email;
+        this.apellido = apellido;
         this.rol = rol;
     }
 
@@ -43,12 +47,12 @@ public class Empleado {
         this.nombre = nombre;
     }
 
-    public String getEmail() {
-        return email;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public Rol getRol() {
@@ -59,3 +63,4 @@ public class Empleado {
         this.rol = rol;
     }
 }
+

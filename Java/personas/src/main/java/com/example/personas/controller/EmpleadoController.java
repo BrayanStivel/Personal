@@ -1,7 +1,6 @@
 package com.example.personas.controller;
 
-import com.example.personas.entity.Empleado;
-import com.example.personas.entity.Rol;
+import com.example.personas.model.Empleado;
 import com.example.personas.service.EmpleadoService;
 import com.example.personas.service.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,22 +20,38 @@ public class EmpleadoController {
     @Autowired
     private RolService rolService;
 
-    @GetMapping("/crear")
-    public String mostrarFormularioCreacionEmpleado(Model model) {
-        model.addAttribute("roles", rolService.obtenerTodosLosRoles());
-        return "empleados/crearEmpleado";
+    @GetMapping
+    public String listarEmpleados(Model model) {
+        List<Empleado> empleados = empleadoService.listarEmpleados();
+        model.addAttribute("empleados", empleados);
+        return "empleados"; // nombre de la vista
+    }
+
+    @GetMapping("/form")
+    public String mostrarFormularioEmpleado(Model model) {
+        model.addAttribute("empleado", new Empleado());
+        model.addAttribute("roles", rolService.listarRoles());
+        return "empleado-form"; // nombre de la vista
+    }
+
+    @GetMapping("/{id}")
+    public String mostrarEmpleado(@PathVariable Long id, Model model) {
+        Empleado empleado = empleadoService.obtenerEmpleado(id)
+                .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
+        model.addAttribute("empleado", empleado);
+        model.addAttribute("roles", rolService.listarRoles());
+        return "empleado-form"; // nombre de la vista
     }
 
     @PostMapping
-    public String crearEmpleado(@ModelAttribute Empleado empleado) {
-        empleadoService.crearEmpleado(empleado);
-        return "redirect:/empleados";
+    public String guardarEmpleado(@ModelAttribute Empleado empleado) {
+        empleadoService.guardarEmpleado(empleado);
+        return "redirect:/empleados"; // redirigir a la lista de empleados
     }
 
-    @GetMapping
-    public String listarEmpleados(Model model) {
-        List<Empleado> empleados = empleadoService.obtenerTodosLosEmpleados();
-        model.addAttribute("empleados", empleados);
-        return "empleados/listarEmpleados";
+    @DeleteMapping("/delete/{id}")
+    public String eliminarEmpleado(@PathVariable Long id) {
+        empleadoService.eliminarEmpleado(id);
+        return "redirect:/empleados"; // redirigir a la lista de empleados
     }
 }
