@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Roles</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Lista de Roles</h1>
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre del Rol</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="rol : ${roles}">
+                    <td th:text="${rol.id}"></td>
+                    <td th:text="${rol.nombre}"></td>
+                    <td>
+                        <a th:href="@{/roles/{id}(id=${rol.id})}" class="btn btn-info btn-sm">Ver</a>
+                        <a th:href="@{/roles/eliminar/{id}(id=${rol.id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a th:href="@{/}" class="btn btn-secondary">Volver al inicio</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Empleados</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Lista de Empleados</h1>
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="empleado : ${empleados}">
+                    <td th:text="${empleado.id}"></td>
+                    <td th:text="${empleado.nombre}"></td>
+                    <td th:text="${empleado.apellido}"></td>
+                    <td th:text="${empleado.rol.nombre}"></td>
+                    <td>
+                        <a th:href="@{/empleados/{id}(id=${empleado.id})}" class="btn btn-info btn-sm">Ver</a>
+                        <a th:href="@{/empleados/eliminar/{id}(id=${empleado.id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a th:href="@{/}" class="btn btn-secondary">Volver al inicio</a>
+    </div>
+</body>
+</html>
