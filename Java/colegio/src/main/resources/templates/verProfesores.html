@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Profesores</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Lista de Profesores</h1>
+        
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="profesor : ${profesores}">
+                    <td th:text="${profesor.idProfesor}"></td>
+                    <td th:text="${profesor.nombre}"></td>
+                    <td th:text="${profesor.apellido}"></td>
+                    <td th:text="${profesor.correo_electronico}"></td>
+                    <td>
+                        <a class="btn btn-info btn-sm" th:href="@{/profesores/{id}(id=${profesor.idProfesor})}">Ver</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="text-center mt-4">
+            <a class="btn btn-primary" th:href="@{/}">Volver al Inicio</a>
+        </div>
+    </div>
+</body>
+</html>
