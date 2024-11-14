@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Orden de Compra</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Detalles de la Orden de Compra</h1>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${ordenDeCompra.producto.nombre}"></h5>
+                <p><strong>Fecha:</strong> <span th:text="${ordenDeCompra.fecha}"></span></p>
+                <p><strong>Cantidad:</strong> <span th:text="${ordenDeCompra.cantidad}"></span></p>
+                <p><strong>Precio Total:</strong> <span th:text="${ordenDeCompra.precioTotal}"></span></p>
+                <p><strong>Descripción de la Compra:</strong> <span th:text="${ordenDeCompra.descripcionCompra}"></span></p>
+                <p><strong>Cliente:</strong> <span th:text="${ordenDeCompra.cliente.nombre}"></span></p>
+                <p><strong>Producto:</strong> <span th:text="${ordenDeCompra.producto.nombre}"></span></p>
+            </div>
+        </div>
+
+        <a href="/ordenes" class="btn btn-secondary mt-3">Volver a la lista</a>
+    </div>
+</body>
+</html>

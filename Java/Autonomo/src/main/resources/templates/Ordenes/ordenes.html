@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Órdenes de Compra</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Lista de Órdenes de Compra</h1>
+        <a href="/" class="btn btn-secondary mb-3">Volver al Inicio</a>
+        <a href="/ordenes/crear" class="btn btn-primary mb-3">Crear Orden de Compra</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Cliente</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Total</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="orden : ${ordenes}">
+                    <td th:text="${orden.idOrdenCompra}"></td>
+                    <td th:text="${orden.fecha}"></td>
+                    <td th:text="${orden.cliente.nombre}"></td>
+                    <td th:text="${orden.producto.nombre}"></td>
+                    <td th:text="${orden.cantidad}"></td>
+                    <td th:text="${orden.precioTotal}"></td>
+                    <td th:text="${orden.descripcionCompra}"></td>
+                    <td>
+                        <a href="/ordenes/{id}" th:href="@{/ordenes/{id}(id=${orden.idOrdenCompra})}" class="btn btn-info btn-sm">Ver</a>
+                        <a href="/ordenes/eliminar/{id}" th:href="@{/ordenes/eliminar/{id}(id=${orden.idOrdenCompra})}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar esta orden de compra?')">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

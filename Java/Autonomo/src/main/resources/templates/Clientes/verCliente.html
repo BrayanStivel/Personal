@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Cliente</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Detalles del Cliente</h1>
+        
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${cliente.nombre}"></h5>
+                <p class="card-text"><strong>Teléfono:</strong> <span th:text="${cliente.telefono}"></span></p>
+                <p class="card-text"><strong>Dirección:</strong> <span th:text="${cliente.direccion}"></span></p>
+                <p class="card-text"><strong>Correo Electrónico:</strong> <span th:text="${cliente.correo_electronico}"></span></p>
+                
+                <a href="/clientes" class="btn btn-primary">Volver a la lista</a>
+                <a th:href="@{/clientes/eliminar/{id}(id=${cliente.idCliente})}" class="btn btn-danger ml-2">Eliminar Cliente</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

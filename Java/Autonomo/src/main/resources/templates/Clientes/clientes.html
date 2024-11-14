@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Lista de Clientes</h1>
+        
+        <!-- Botón para volver al inicio -->
+        <a href="/" class="btn btn-secondary mb-3">Volver al Inicio</a>
+        
+        <!-- Botón para crear un nuevo cliente -->
+        <a href="/clientes/crear" class="btn btn-primary mb-3">Crear Nuevo Cliente</a>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Dirección</th>
+                    <th>Correo Electrónico</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cliente : ${clientes}">
+                    <td th:text="${cliente.nombre}"></td>
+                    <td th:text="${cliente.telefono}"></td>
+                    <td th:text="${cliente.direccion}"></td>
+                    <td th:text="${cliente.correo_electronico}"></td>
+                    <td>
+                        <a th:href="@{/clientes/{id}(id=${cliente.idCliente})}" class="btn btn-info">Ver</a>
+                        <a th:href="@{/clientes/eliminar/{id}(id=${cliente.idCliente})}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

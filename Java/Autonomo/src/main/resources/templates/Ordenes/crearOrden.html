@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Orden de Compra</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Crear Orden de Compra</h1>
+
+        <form th:action="@{/ordenes/guardar}" th:object="${ordenDeCompra}" method="post">
+            <div class="form-group">
+                <label for="fecha">Fecha</label>
+                <input type="date" id="fecha" th:field="*{fecha}" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cantidad">Cantidad</label>
+                <input type="number" id="cantidad" th:field="*{cantidad}" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="precioTotal">Precio Total</label>
+                <input type="number" id="precioTotal" th:field="*{precioTotal}" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcionCompra">Descripción de la Compra</label>
+                <textarea id="descripcionCompra" th:field="*{descripcionCompra}" class="form-control" placeholder="Descripción de la compra" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="cliente">Cliente</label>
+                <select id="cliente" th:field="*{cliente}" class="form-control" required>
+                    <option th:each="cliente : ${clientes}" th:value="${cliente.idCliente}" th:text="${cliente.nombre}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="producto">Producto</label>
+                <select id="producto" th:field="*{producto}" class="form-control" required>
+                    <option th:each="producto : ${productos}" th:value="${producto.idProducto}" th:text="${producto.nombre}"></option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-block">Guardar Orden de Compra</button>
+        </form>
+    </div>
+</body>
+</html>

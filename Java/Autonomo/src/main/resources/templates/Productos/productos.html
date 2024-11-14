@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Lista de Productos</h1>
+        
+        <!-- Botón para volver al inicio -->
+        <a href="/" class="btn btn-secondary mb-3">Volver al Inicio</a>
+        
+        <!-- Botón para crear un nuevo producto -->
+        <a href="/productos/crear" class="btn btn-primary mb-3">Crear Producto</a>
+        
+        <!-- Tabla de productos -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Cantidad Disponible</th>
+                    <th>Cantidad Reservada</th>
+                    <th>Categoría</th>
+                    <th>Proveedor</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="producto : ${productos}">
+                    <td th:text="${producto.idProducto}"></td>
+                    <td th:text="${producto.nombre}"></td>
+                    <td th:text="${producto.descripcion}"></td>
+                    <td th:text="${producto.precio}"></td>
+                    <td th:text="${producto.cantidadDisponible}"></td>
+                    <td th:text="${producto.cantidadReserva}"></td>
+                    <td th:text="${producto.categoria.nombre}"></td>
+                    <td th:text="${producto.proveedor.nombre}"></td>
+                    <td>
+                        <a href="/productos/{id}" th:href="@{/productos/{id}(id=${producto.idProducto})}" class="btn btn-info btn-sm">Ver</a>
+                        <a href="/productos/eliminar/{id}" th:href="@{/productos/eliminar/{id}(id=${producto.idProducto})}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este producto?')">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

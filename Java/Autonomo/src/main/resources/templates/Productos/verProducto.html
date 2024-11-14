@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Producto</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Detalles del Producto</h1>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${producto.nombre}"></h5>
+                <p><strong>Descripción:</strong> <span th:text="${producto.descripcion}"></span></p>
+                <p><strong>Precio:</strong> <span th:text="${producto.precio}"></span></p>
+                <p><strong>Cantidad Disponible:</strong> <span th:text="${producto.cantidadDisponible}"></span></p>
+                <p><strong>Cantidad Reservada:</strong> <span th:text="${producto.cantidadReserva}"></span></p>
+                <p><strong>Categoría:</strong> <span th:text="${producto.categoria.nombre}"></span></p>
+                <p><strong>Proveedor:</strong> <span th:text="${producto.proveedor.nombre}"></span></p>
+            </div>
+        </div>
+
+        <a href="/productos" class="btn btn-secondary mt-3">Volver a la lista</a>
+    </div>
+</body>
+</html>
