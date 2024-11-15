@@ -15,19 +15,31 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre Curso</th>
+                    <th>Profesor</th>
+                    <th>Accion</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="curso : ${cursos}">
                     <td th:text="${curso.idCurso}"></td>
                     <td th:text="${curso.nombre_Curso}"></td>
+                    <td>
+                        <span th:if="${curso.profesor != null}" th:text="${curso.profesor.nombre}"></span>
+                        <span th:if="${curso.profesor == null}">No asignado</span>
+                    </td>
+                    <td>
+                        <!-- <a class="btn btn-warning btn-sm" th:href="@{/materias/editar/{id}(id=${materias.idMateria})}">Editar</a>-->
+                         <a class="btn btn-danger btn-sm" th:href="@{/cursos/eliminar/{id}(id=${curso.idCurso})}">Eliminar</a>
+                         
+                     </td>
                 </tr>
             </tbody>
         </table>
 
         <div class="text-center mt-4">
+            <a href="/cursos/crear" class="btn btn-primary">Crear curso</a>
             <a class="btn btn-primary" th:href="@{/}">Volver al Inicio</a>
         </div>
     </div>
-</body>
+</body>    
 </html>

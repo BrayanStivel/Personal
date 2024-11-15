@@ -27,7 +27,8 @@
                     <td th:text="${profesor.apellido}"></td>
                     <td th:text="${profesor.correo_electronico}"></td>
                     <td>
-                        <a class="btn btn-info btn-sm" th:href="@{/profesores/{id}(id=${profesor.idProfesor})}">Ver</a>
+                        <a class="btn btn-warning btn-sm" th:href="@{/profesores/editar/{id}(id=${profesor.idProfesor})}">Editar</a>
+                        <a class="btn btn-danger btn-sm" th:href="@{/profesores/eliminar/{id}(id=${profesor.idProfesor})}">Eliminar</a>
                     </td>
                 </tr>
             </tbody>
@@ -35,6 +36,8 @@
 
         <div class="text-center mt-4">
             <a class="btn btn-primary" th:href="@{/}">Volver al Inicio</a>
+            <a href="/profesores/crear" class="btn btn-primary">Crear profesor</a>
+            
         </div>
     </div>
 </body>

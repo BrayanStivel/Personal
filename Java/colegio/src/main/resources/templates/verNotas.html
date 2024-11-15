@@ -17,20 +17,27 @@
                     <th>Estudiante</th>
                     <th>Materia</th>
                     <th>Nota</th>
+                    <th>Accion</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="nota : ${notas}">
                     <td th:text="${nota.idNota}"></td>
                     <td th:text="${nota.estudiante.nombre}"></td>
-                    <td th:text="${nota.materia.nombre_Materia}"></td>
-
+                    <td th:text="${nota.materia.nombre_Materia}"></td> 
+                    <td th:text="${nota.nota}"></td> 
+                    <td>
+                        <!-- <a class="btn btn-warning btn-sm" th:href="@{/materias/editar/{id}(id=${materias.idMateria})}">Editar</a>-->
+                         <a class="btn btn-danger btn-sm" th:href="@{/notas/eliminar/{id}(id=${nota.idNota})}">Eliminar</a>
+                     </td>
+                    
                 </tr>
             </tbody>
         </table>
 
         <div class="text-center mt-4">
             <a class="btn btn-primary" th:href="@{/}">Volver al Inicio</a>
+            <a href="/notas/crear" class="btn btn-primary">Crear Nota</a>
         </div>
     </div>
 </body>

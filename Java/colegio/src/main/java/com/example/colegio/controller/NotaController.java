@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute; // Asegúrate de importar la clase correcta
-import org.springframework.web.bind.annotation.PathVariable; // Asegúrate de importar la clase correcta
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping; // Servicio de estudiantes
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.colegio.entity.Estudiante; // Servicio de materias
+import com.example.colegio.entity.Estudiante;
 import com.example.colegio.entity.Materia;
 import com.example.colegio.entity.Notas;
 import com.example.colegio.service.EstudianteService;
@@ -26,16 +26,16 @@ public class NotaController {
     private NotaService notaService;
 
     @Autowired
-    private EstudianteService estudianteService; // Inyectar servicio de estudiantes
+    private EstudianteService estudianteService;
 
     @Autowired
-    private MateriaService materiaService; // Inyectar servicio de materias
+    private MateriaService materiaService;
 
     @GetMapping
     public String listarNotas(Model model) {
         List<Notas> notas = notaService.findAll();
         model.addAttribute("notas", notas);
-        return "verNotas"; // Nombre de la plantilla HTML
+        return "verNotas";
     }
 
     @GetMapping("/crear")

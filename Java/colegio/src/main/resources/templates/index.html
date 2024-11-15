@@ -8,25 +8,17 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="mt-4 mb-4 text-center">Gestión de Estudiantes y Cursos</h1>
+        <h1 class="mt-4 mb-4 text-center">Escuela</h1>
 
         <h2 class="mt-4 mb-4 text-center">Ver Registros</h2>
         <div class="d-flex justify-content-center flex-wrap mb-4">
-            <a class="btn btn-primary m-2" th:href="@{/estudiantes}">Ver Estudiantes</a>
-            <a class="btn btn-primary m-2" th:href="@{/profesores}">Ver Profesores</a>
-            <a class="btn btn-primary m-2" th:href="@{/cursos}">Ver Cursos</a>
-            <a class="btn btn-primary m-2" th:href="@{/materias}">Ver Materias</a>
-            <a class="btn btn-primary m-2" th:href="@{/notas}">Ver Notas</a>
+            <a class="btn btn-primary btn-lg m-2" th:href="@{/estudiantes}">Ver Estudiantes</a>
+            <a class="btn btn-primary btn-lg m-2" th:href="@{/profesores}">Ver Profesores</a>
+            <a class="btn btn-primary btn-lg m-2" th:href="@{/cursos}">Ver Cursos</a>
+            <a class="btn btn-primary btn-lg m-2" th:href="@{/materias}">Ver Materias</a>
+            <a class="btn btn-primary btn-lg m-2" th:href="@{/notas}">Ver Notas</a>
         </div>
 
-        <h2 class="mt-4 mb-4 text-center">Crear Nuevos Registros</h2>
-        <div class="d-flex justify-content-center flex-wrap mb-4">
-            <a class="btn btn-success m-2" th:href="@{/estudiantes/crear}">Crear Estudiante</a>
-            <a class="btn btn-success m-2" th:href="@{/profesores/crear}">Crear Profesor</a>
-            <a class="btn btn-success m-2" th:href="@{/cursos/crear}">Crear Curso</a>
-            <a class="btn btn-success m-2" th:href="@{/materias/crear}">Crear Materia</a>
-            <a class="btn btn-success m-2" th:href="@{/notas/crear}">Crear Nota</a>
-        </div>
     </div>
 </body>
 </html>

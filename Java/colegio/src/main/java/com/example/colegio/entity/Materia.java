@@ -13,21 +13,23 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Table(name= "Materias")
+@Table(name = "Materias")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Materia {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idMateria;
     private String nombre_Materia;
     private String hora_incio;
     private String hora_fin;
-    private String hora_;
-    
 
-    @ManyToOne 
-    @JoinColumn (name= "idCurso")
+    @ManyToOne
+    @JoinColumn(name = "idCurso")
     private Curso curso;
 
+    public void setId(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setId'");
+    }
 }

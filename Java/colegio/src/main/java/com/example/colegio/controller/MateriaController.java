@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.colegio.entity.Curso;
 import com.example.colegio.entity.Materia;
-import com.example.colegio.service.CursoService; // Asegúrate de importar el servicio de Curso
+import com.example.colegio.service.CursoService;
 import com.example.colegio.service.MateriaService;
 
 @Controller
@@ -24,7 +24,7 @@ public class MateriaController {
     private MateriaService materiaService;
 
     @Autowired
-    private CursoService cursoService; // Inyección del servicio de Curso
+    private CursoService cursoService;
 
     @GetMapping
     public String listarMaterias(Model model) {
@@ -36,9 +36,9 @@ public class MateriaController {
     @GetMapping("/crear")
     public String crearMateriaForm(Model model) {
         model.addAttribute("materia", new Materia());
-        List<Curso> cursos = cursoService.findAll(); // Obtener la lista de cursos
+        List<Curso> cursos = cursoService.findAll();
         model.addAttribute("cursos", cursos);
-        return "crearMateria"; // Nombre de la plantilla HTML
+        return "crearMateria";
     }
 
     @PostMapping("/guardar")
@@ -59,4 +59,24 @@ public class MateriaController {
         materiaService.delete(id);
         return "redirect:/materias";
     }
+
+    @GetMapping("/actualizar/{id}")
+public String mostrarFormularioDeActualizacion(@PathVariable("id") Long id, Model model) {
+    Materia materia = materiaService.findById(id);  
+    List<Curso> cursos = cursoService.findAll();  
+    model.addAttribute("materia", materia);  
+    model.addAttribute("cursos", cursos);    
+    return "editarMateria";
+
+}
+@PostMapping("/materias/actualizar/{id}")
+    public String actualizarMateria(@PathVariable("id") Long id, @ModelAttribute("materia") Materia materia) {
+        // Lógica para actualizar la materia
+        materiaService.update(id, materia);
+        
+        // Redirigir a la lista de materias o mostrar una página de éxito
+        return "redirect:/materias";
+    }
+
+
 }

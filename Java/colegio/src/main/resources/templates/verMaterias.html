@@ -15,17 +15,29 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre de la Materia</th>
+                    <th>Hora de Inicio</th>
+                    <th>Hora de Fin</th>
+                    <th>Curso</th>
+                    <th>Accion</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="materia : ${materias}">
                     <td th:text="${materia.idMateria}"></td>
                     <td th:text="${materia.nombre_Materia}"></td>
+                    <td th:text="${materia.hora_incio}"></td>
+                    <td th:text="${materia.hora_fin}"></td>    
+                    <td th:text="${materia.curso.nombre_Curso}"></td> 
+                    <td>
+                       <a class="btn btn-warning btn-sm" th:href="@{/materias/actualizar/{id}(id=${materia.idMateria})}">Editar</a>
+                        <a class="btn btn-danger btn-sm" th:href="@{/materias/eliminar/{id}(id=${materia.idMateria})}">Eliminar</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
 
         <div class="text-center mt-4">
+            <a href="/materias/crear" class="btn btn-primary">Crear Materia</a>
             <a class="btn btn-primary" th:href="@{/}">Volver al Inicio</a>
         </div>
     </div>

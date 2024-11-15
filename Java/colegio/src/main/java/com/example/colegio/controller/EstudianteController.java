@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.colegio.entity.Estudiante;
 import com.example.colegio.service.EstudianteService;
 
-
-
 @Controller
 @RequestMapping("/estudiantes")
 public class EstudianteController {
@@ -39,12 +37,15 @@ public class EstudianteController {
     @PostMapping("/guardar")
     public String guardarEstudiante(@ModelAttribute Estudiante estudiante) {
         estudianteService.save(estudiante);
-        return "redirect:/estudiantes"; 
+        return "redirect:/estudiantes";
     }
 
     @GetMapping("/{id}")
     public String verEstudiante(@PathVariable Long id, Model model) {
         Estudiante estudiante = estudianteService.findById(id);
+        if (estudiante == null) {
+            return "redirect:/estudiantes";
+        }
         model.addAttribute("estudiante", estudiante);
         return "verEstudiante"; 
     }
@@ -54,14 +55,20 @@ public class EstudianteController {
         estudianteService.delete(id);
         return "redirect:/estudiantes";
     }
+
+    @GetMapping("/editar/{id}")
+    public String editarEstudianteForm(@PathVariable Long id, Model model) {
+        Estudiante estudiante = estudianteService.findById(id);
+        if (estudiante == null) {
+            return "redirect:/estudiantes"; 
+        }
+        model.addAttribute("estudiante", estudiante);
+        return "editarEstudiante";
+    }
+
+    @PostMapping("/actualizar")
+    public String actualizarEstudiante(@ModelAttribute Estudiante estudiante) {
+        estudianteService.save(estudiante);
+        return "redirect:/estudiantes"; 
+    }
 }
-    
-    
-    
-    
-    
-    
-    
-    
-
-

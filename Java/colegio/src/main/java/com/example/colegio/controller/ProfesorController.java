@@ -52,4 +52,19 @@ public class ProfesorController {
         profesorService.delete(id);
         return "redirect:/profesores";
     }
+    @GetMapping("/editar/{id}")
+    public String editarProfesorForm(@PathVariable Long id, Model model) {
+        Profesor profesor = profesorService.findById(id); 
+        if (profesor == null) {
+            return "redirect:/profesores";
+        }
+        model.addAttribute("profesor", profesor); 
+        return "editarProfesor";
+    }
+
+    @PostMapping("/actualizar")
+    public String actualizarProfesor(@ModelAttribute Profesor profesor) {
+        profesorService.save(profesor);
+        return "redirect:/profesores";
+    }
 }

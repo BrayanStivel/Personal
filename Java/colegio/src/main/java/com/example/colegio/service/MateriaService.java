@@ -7,12 +7,18 @@ import org.springframework.stereotype.Service;
 
 import com.example.colegio.entity.Materia;
 import com.example.colegio.repository.MateriaRepository;
+import com.example.colegio.repository.NotaRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class MateriaService {
 
     @Autowired
     private MateriaRepository materiaRepository;
+
+    @Autowired
+    private NotaRepository notaRepository;
 
     public List<Materia> findAll() {
         return materiaRepository.findAll();
@@ -26,7 +32,22 @@ public class MateriaService {
         return materiaRepository.findById(id).orElse(null);
     }
 
-    public void delete(Long id) {
-        materiaRepository.deleteById(id);
+    @Transactional
+    public void delete(long idMateria) {
+        notaRepository.deleteByMateria_IdMateria(idMateria);
+        materiaRepository.deleteById(idMateria);
+    }
+
+    @Transactional
+    public Materia update(Long id, Materia materiaDetalles) {
+        Materia materiaExistente = materiaRepository.findById(id).orElse(null);
+        
+        if (materiaExistente != null) {
+            materiaExistente.setNombre_Materia(materiaDetalles.getNombre_Materia());
+            materiaExistente.setCurso(materiaDetalles.getCurso());
+            return materiaRepository.save(materiaExistente);
+        }
+        
+        return null;
     }
 }

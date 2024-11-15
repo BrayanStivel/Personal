@@ -22,6 +22,7 @@ public class CursoController {
     @Autowired
     private CursoService cursoService;
 
+
     @GetMapping
     public String listarCursos(Model model) {
         List<Curso> cursos = cursoService.findAll();

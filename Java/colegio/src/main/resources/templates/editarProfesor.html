@@ -3,28 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Estudiante</title>
-    <!-- Enlace a Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Editar Profesor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="mb-4">Agregar Estudiante</h1>
-        <form th:action="@{/estudiantes/guardar}" th:object="${estudiante}" method="post">
+    <div class="container mt-4">
+        <h1>Editar Profesor</h1>
+
+        <!-- Formulario de edición de profesor -->
+        <form th:action="@{/profesores/actualizar}" th:object="${profesor}" method="post">
             <div class="form-group">
-                <label for="nombre">Nombre:</label>
+                <label for="nombre">Nombre</label>
                 <input type="text" id="nombre" th:field="*{nombre}" class="form-control" required>
             </div>
+
             <div class="form-group">
-                <label for="apellido">Apellido:</label>
+                <label for="apellido">Apellido</label>
                 <input type="text" id="apellido" th:field="*{apellido}" class="form-control" required>
             </div>
+
             <div class="form-group">
-                <label for="correo_electronico">Correo:</label>
+                <label for="correo_electronico">Correo Electrónico</label>
                 <input type="email" id="correo_electronico" th:field="*{correo_electronico}" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a class="btn btn-secondary" th:href="@{/estudiantes}">Cancelar</a>
+
+            <!-- Botones -->
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+            <a href="/profesores" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
 </body>

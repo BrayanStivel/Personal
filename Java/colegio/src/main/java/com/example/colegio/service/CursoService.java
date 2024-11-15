@@ -34,8 +34,6 @@ public class CursoService {
     public void delete(Long id) {
         cursoRepository.deleteById(id);
     }
-
-    // Método para obtener todos los profesores
     public List<Profesor> findAllProfesores() {
         return profesorRepository.findAll();
     }
