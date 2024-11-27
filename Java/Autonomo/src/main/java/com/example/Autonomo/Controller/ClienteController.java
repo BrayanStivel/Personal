@@ -3,6 +3,7 @@ package com.example.Autonomo.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,21 +27,21 @@ public class ClienteController {
     public String listarClientes(Model model) {
         List<Cliente> clientes = clienteService.getAllClientes();
         model.addAttribute("clientes", clientes);
-        return "clientes/clientes"; // Ruta correcta para la plantilla
+        return "clientes/clientes";
     }
 
     // Crear un nuevo cliente
     @GetMapping("/crear")
     public String crearCliente(Model model) {
         model.addAttribute("cliente", new Cliente());
-        return "clientes/crearCliente"; // Ruta correcta para la plantilla
+        return "clientes/crearCliente";
     }
 
     // Guardar un cliente
     @PostMapping("/guardar")
     public String guardarCliente(@ModelAttribute Cliente cliente) {
         clienteService.createCliente(cliente);
-        return "redirect:/clientes"; // Redirige a la lista de clientes después de guardar
+        return "redirect:/clientes";
     }
 
     // Ver detalles de un cliente
@@ -48,13 +49,39 @@ public class ClienteController {
     public String verCliente(@PathVariable Long id, Model model) {
         Cliente cliente = clienteService.getClienteById(id).orElse(null);
         model.addAttribute("cliente", cliente);
-        return "clientes/verCliente"; // Ruta correcta para la plantilla
+        return "clientes/verCliente"; 
     }
 
     // Eliminar un cliente
     @GetMapping("/eliminar/{id}")
-    public String eliminarCliente(@PathVariable Long id) {
-        clienteService.deleteCliente(id);
-        return "redirect:/clientes"; // Redirige a la lista de clientes después de eliminar
+    public String eliminarCliente(@PathVariable Long id, Model model) {
+        try {
+            clienteService.deleteCliente(id);
+        } catch (DataIntegrityViolationException ex) {
+            model.addAttribute("error", ex.getMessage());
+            return "clientes/clientes";
+        }
+        return "redirect:/clientes";
+    }
+
+    // Mostrar el formulario de edición de cliente
+    @GetMapping("/editar/{id}")
+    public String editarCliente(@PathVariable Long id, Model model) {
+        Cliente cliente = clienteService.getClienteById(id).orElse(null);
+        if (cliente != null) {
+            model.addAttribute("cliente", cliente);
+            return "clientes/editarCliente";
+        }
+        return "redirect:/clientes";
+    }
+
+    // Guardar el cliente actualizado
+    @PostMapping("/actualizar/{id}")
+    public String actualizarCliente(@PathVariable Long id, @ModelAttribute Cliente clienteDetalles) {
+        Cliente clienteActualizado = clienteService.updateCliente(id, clienteDetalles);
+        if (clienteActualizado != null) {
+            return "redirect:/clientes";
+        }
+        return "redirect:/clientes";
     }
 }

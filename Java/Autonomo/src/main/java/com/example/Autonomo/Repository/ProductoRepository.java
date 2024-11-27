@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.Autonomo.Entity.Producto;
 
-public interface ProductoRepository extends JpaRepository<Producto, Long>{
+public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
+    boolean existsByProveedorIdProveedor(Long idProveedor);
+    boolean existsByCategoriaIdCategoria(Long idCategoria);
 }

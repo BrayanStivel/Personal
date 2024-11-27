@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Cliente</title>
+</head>
+<body>
+
+<h1>Editar Cliente</h1>
+
+<form th:action="@{/clientes/actualizar/{id}(id=${cliente.idCliente})}" th:object="${cliente}" method="post">
+    <label for="nombre">Nombre:</label>
+    <input type="text" th:field="*{nombre}" id="nombre" />
+    
+    <label for="correo_electronico">Email:</label>
+    <input type="correo_electronico" th:field="*{correo_electronico}" id="correo_electronico" />
+    
+    <label for="telefono">Teléfono:</label>
+    <input type="text" th:field="*{telefono}" id="telefono" />
+    
+    <button type="submit">Actualizar</button>
+</form>
+
+<a href="/clientes">Volver a la lista de clientes</a>
+
+</body>
+</html>

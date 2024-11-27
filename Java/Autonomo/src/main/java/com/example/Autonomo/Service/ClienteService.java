@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.Autonomo.Entity.Cliente;
 import com.example.Autonomo.Repository.ClienteRepository;
@@ -21,8 +22,8 @@ public class ClienteService {
     }
 
     // Obtener un cliente por su ID
-    public Optional<Cliente> getClienteById(Long Id) {
-        return clienteRepository.findById(Id);
+    public Optional<Cliente> getClienteById(Long id) {
+        return clienteRepository.findById(id);
     }
 
     // Crear un nuevo cliente
@@ -31,15 +32,23 @@ public class ClienteService {
     }
 
     // Actualizar un cliente
-    public Cliente updateCliente(Long Id, Cliente cliente) {
-        if (clienteRepository.existsById(Id)) {
-            cliente.setIdCliente(Id); 
+    @Transactional
+    public Cliente updateCliente(Long id, Cliente clienteDetalles) {
+        Optional<Cliente> clienteExistente = clienteRepository.findById(id);
+        
+        if (clienteExistente.isPresent()) {
+            Cliente cliente = clienteExistente.get();
+            cliente.setNombre(clienteDetalles.getNombre());
+            cliente.setCorreo_electronico(clienteDetalles.getCorreo_electronico());
+            cliente.setTelefono(clienteDetalles.getTelefono());
             return clienteRepository.save(cliente);
         }
+        
         return null;
     }
 
     // Eliminar un cliente
+    @Transactional
     public void deleteCliente(Long id) {
         clienteRepository.deleteById(id);
     }

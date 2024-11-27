@@ -71,10 +71,7 @@ public String mostrarFormularioDeActualizacion(@PathVariable("id") Long id, Mode
 }
 @PostMapping("/materias/actualizar/{id}")
     public String actualizarMateria(@PathVariable("id") Long id, @ModelAttribute("materia") Materia materia) {
-        // Lógica para actualizar la materia
         materiaService.update(id, materia);
-        
-        // Redirigir a la lista de materias o mostrar una página de éxito
         return "redirect:/materias";
     }
 

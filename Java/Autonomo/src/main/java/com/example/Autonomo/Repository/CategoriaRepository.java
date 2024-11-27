@@ -7,3 +7,4 @@ import com.example.Autonomo.Entity.Categoria;
 public interface  CategoriaRepository extends JpaRepository<Categoria, Long> {
 
 }
+ 

@@ -28,6 +28,7 @@
                     <td th:text="${categoria.descripcion}"></td>
                     <td>
                         <a href="/categorias/eliminar/{id}" th:href="@{/categorias/eliminar/{id}(id=${categoria.idCategoria})}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar esta categoría?')">Eliminar</a>
+                        <a class="btn btn-warning btn-sm" th:href="@{/categorias/editar/{id}(id=${categoria.idCategoria})}">Editar</a>
                     </td>
                 </tr>
             </tbody>

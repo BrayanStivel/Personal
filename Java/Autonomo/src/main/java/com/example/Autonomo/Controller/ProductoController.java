@@ -3,6 +3,7 @@ package com.example.Autonomo.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +32,6 @@ public class ProductoController {
     @Autowired
     private ProveedorService proveedorService;
 
-    // Listar productos
     @GetMapping
     public String listarProductos(Model model) {
         List<Producto> productos = productoService.getAllProductos();
@@ -39,26 +39,23 @@ public class ProductoController {
         return "productos/productos";
     }
 
-    // Formulario para crear un producto
     @GetMapping("/crear")
     public String crearProducto(Model model) {
         List<Categoria> categorias = categoriaService.getAllCategorias();
         List<Proveedor> proveedores = proveedorService.getAllProveedores();
-        Producto producto = new Producto();  // Crea un nuevo objeto Producto
-        model.addAttribute("producto", producto);  // Pasa el objeto Producto al modelo
-        model.addAttribute("categorias", categorias);  // Pasa la lista de categorías
-        model.addAttribute("proveedores", proveedores);  // Pasa la lista de proveedores
+        Producto producto = new Producto();
+        model.addAttribute("producto", producto);
+        model.addAttribute("categorias", categorias);
+        model.addAttribute("proveedores", proveedores);
         return "productos/crearProducto";
     }
 
-    // Guardar producto
     @PostMapping("/guardar")
     public String guardarProducto(@ModelAttribute Producto producto) {
-        productoService.createProducto(producto);  // Guarda el producto
-        return "redirect:/productos";  // Redirige a la lista de productos
+        productoService.createProducto(producto);
+        return "redirect:/productos";
     }
 
-    // Ver detalles de un producto
     @GetMapping("/{id}")
     public String verProducto(@PathVariable Long id, Model model) {
         Producto producto = productoService.getProductoById(id).orElse(null);
@@ -66,10 +63,14 @@ public class ProductoController {
         return "productos/verProducto";
     }
 
-    // Eliminar producto
     @GetMapping("/eliminar/{id}")
-    public String eliminarProducto(@PathVariable Long id) {
-        productoService.deleteProducto(id);
-        return "redirect:/productos";  // Redirige a la lista de productos después de eliminar
+    public String eliminarProducto(@PathVariable Long id, Model model) {
+        try {
+            productoService.deleteProducto(id);
+        } catch (DataIntegrityViolationException ex) {
+            model.addAttribute("error", ex.getMessage());
+            return "productos/productos";
+        }
+        return "redirect:/productos";
     }
 }

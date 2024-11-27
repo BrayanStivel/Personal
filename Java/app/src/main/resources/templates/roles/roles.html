@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Lista de Roles</title>
-    <!-- Enlace a Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -22,6 +21,7 @@
                     <td th:text="${rol.nombre}"></td>
                     <td>
                         <a th:href="@{/roles/{id}(id=${rol.id})}" class="btn btn-info btn-sm">Ver</a>
+                        <a th:href="@{/roles/editar/{id}(id=${rol.id})}" class="btn btn-warning btn-sm">Editar</a>
                         <a th:href="@{/roles/eliminar/{id}(id=${rol.id})}" class="btn btn-danger btn-sm">Eliminar</a>
                     </td>
                 </tr>

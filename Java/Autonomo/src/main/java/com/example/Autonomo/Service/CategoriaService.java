@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.Autonomo.Entity.Categoria;
 import com.example.Autonomo.Repository.CategoriaRepository;
@@ -31,16 +32,22 @@ public class CategoriaService {
     }
 
     // Actualizar una categoría
-    public Categoria updateCategoria(Long Id, Categoria categoria) {
-        if (categoriaRepository.existsById(Id)) {
-            categoria.setIdCategoria(Id);
+    @Transactional
+    public Categoria updateCategoria(Long id, Categoria categoriaDetalles) {
+        Optional<Categoria> categoriaExistente = categoriaRepository.findById(id);
+        
+        if (categoriaExistente.isPresent()) {
+            Categoria categoria = categoriaExistente.get();
+            categoria.setNombre(categoriaDetalles.getNombre());
             return categoriaRepository.save(categoria);
         }
+        
         return null;
     }
 
     // Eliminar una categoría
-    public void deleteCategoria(Long Id) {
-        categoriaRepository.deleteById(Id);
+    @Transactional
+    public void deleteCategoria(Long id) {
+        categoriaRepository.deleteById(id);
     }
 }

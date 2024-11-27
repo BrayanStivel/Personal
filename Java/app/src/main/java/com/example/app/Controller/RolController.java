@@ -53,7 +53,20 @@ public class RolController {
         rolServices.eliminar(id);
         return "redirect:/roles"; 
     }
-    
 
-    
+    @GetMapping("/editar/{id}")
+    public String editarRol(@PathVariable Long id, Model model) {
+        Optional<Rol> rol = rolServices.obtenerPorId(id);
+        if (rol.isPresent()) {
+            model.addAttribute("rol", rol.get());
+            return "roles/editarRol";
+        }
+        return "redirect:/roles"; 
+    }
+
+    @PostMapping("/actualizar")
+    public String actualizarRol(@ModelAttribute Rol rol) {
+        rolServices.guardar(rol);
+        return "redirect:/roles"; 
+    }
 }

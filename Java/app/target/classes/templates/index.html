@@ -1,26 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Inicio</title>
-    <!-- Enlace a Bootstrap CSS -->
+    <title>Gestión de Empleados</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">Gestión de Empleados</h1>
-        <nav class="mt-4">
-            <ul class="nav justify-content-center">
+    <header class="bg-primary text-white text-center py-3">
+        <h1>Gestión de Empleados</h1>
+    </header>
+    
+    <div class="container mt-4">
+        <nav>
+            <ul class="nav justify-content-center bg-light p-3 rounded shadow">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/empleados/lista}">Lista de Empleados</a>
+                    <a class="nav-link text-dark font-weight-bold" th:href="@{/empleados/lista}">Lista de Empleados</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/roles}">Lista de Roles</a>
+                    <a class="nav-link text-dark font-weight-bold" th:href="@{/empleados/nuevo}">Crear Empleado</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/roles/nuevo}">Crear Nuevo Rol</a>
+                    <a class="nav-link text-dark font-weight-bold" th:href="@{/roles}">Lista de Roles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark font-weight-bold" th:href="@{/roles/nuevo}">Crear Nuevo Rol</a>
                 </li>
             </ul>
         </nav>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

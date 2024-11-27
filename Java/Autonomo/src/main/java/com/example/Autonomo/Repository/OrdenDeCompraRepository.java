@@ -6,4 +6,6 @@ import com.example.Autonomo.Entity.OrdenDeCompra;
 
 public interface OrdenDeCompraRepository extends JpaRepository<OrdenDeCompra, Long> {
 
+    boolean existsByProductoIdProducto(Long idProducto);
+    boolean existsByClienteIdCliente(Long idCliente);
 }

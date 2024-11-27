@@ -6,13 +6,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.app.Entity.Empleado; // Asegúrate de importar esta clase
+import com.example.app.Entity.Empleado;
 import com.example.app.Repository.EmpleadoRepository;
 
 @Service
 public class EmpleadoServices {
 
-    @Autowired // Añade esta anotación para la inyección de dependencias
+    @Autowired 
     private EmpleadoRepository empleadoRepository;
 
     public List<Empleado> obtenerTodos() {
@@ -25,6 +25,18 @@ public class EmpleadoServices {
 
     public Empleado guardar(Empleado empleado) {
         return empleadoRepository.save(empleado);
+    }
+    public Empleado actualizar(Long id, Empleado empleadoActualizado) {
+        return empleadoRepository.findById(id)
+                .map(empleado -> {
+                    empleado.setNombre(empleadoActualizado.getNombre());
+                    empleado.setApellido(empleadoActualizado.getApellido());
+                    empleado.setTelefono(empleadoActualizado.getTelefono());
+                    empleado.setCorreoElectronico(empleadoActualizado.getCorreoElectronico());
+                    empleado.setDireccionResidencia(empleadoActualizado.getDireccionResidencia());
+                    empleado.setSalario(empleadoActualizado.getSalario());
+                    return empleadoRepository.save(empleado);
+                }).orElseThrow(() -> new RuntimeException("Empleado no encontrado con ID: " + id));
     }
 
     public void eliminar(Long id) {

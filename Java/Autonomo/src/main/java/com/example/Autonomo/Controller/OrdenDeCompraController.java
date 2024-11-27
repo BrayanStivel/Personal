@@ -18,6 +18,8 @@ import com.example.Autonomo.Service.ClienteService;
 import com.example.Autonomo.Service.OrdenCompraService;
 import com.example.Autonomo.Service.ProductoService;
 
+
+
 @Controller
 @RequestMapping("/ordenes")
 public class OrdenDeCompraController {
@@ -35,7 +37,7 @@ public class OrdenDeCompraController {
     public String listarOrdenes(Model model) {
         List<OrdenDeCompra> ordenes = ordenDeCompraService.getAllOrdenesCompra();
         model.addAttribute("ordenes", ordenes);
-        return "ordenes/ordenes"; // Cambiado para que use la vista en templates/ordenes
+        return "ordenes/ordenes";
     }
 
     @GetMapping("/crear")
@@ -45,7 +47,7 @@ public class OrdenDeCompraController {
         model.addAttribute("ordenDeCompra", new OrdenDeCompra());
         model.addAttribute("productos", productos);
         model.addAttribute("clientes", clientes);
-        return "ordenes/crearOrden"; // Cambiado para que use la vista en templates/ordenes
+        return "ordenes/crearOrden";
     }
 
     @PostMapping("/guardar")
@@ -58,7 +60,7 @@ public class OrdenDeCompraController {
     public String verOrden(@PathVariable Long id, Model model) {
         OrdenDeCompra ordenDeCompra = ordenDeCompraService.getOrdenCompraById(id).orElse(null);
         model.addAttribute("ordenDeCompra", ordenDeCompra);
-        return "ordenes/verOrden"; // Cambiado para que use la vista en templates/ordenes
+        return "ordenes/verOrden";
     }
 
     @GetMapping("/eliminar/{id}")
